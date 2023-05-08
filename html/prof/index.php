@@ -42,10 +42,8 @@ $materias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <input type="text" name="titulo" value=""><br>
                 <label for="conteudo">Conteúdo</label><br>
                 <div id="container">
-                    <textarea id="editor" name="conteudo">
-                    </textarea>
+                    <textarea id="editor" name="conteudo"></textarea>
                 </div>
-
                 <input type="submit" value="Cadastrar Conteúdo" class="cadConteudo">
             </form>
         </section>

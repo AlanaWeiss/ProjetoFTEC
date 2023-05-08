@@ -28,6 +28,8 @@ if (isset($_GET['materia'])) {
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="../../css/aluno.css">
     <link rel="stylesheet" href="../../css/geral.css">
+    <link rel="stylesheet" href="../../css/textEditor.css">
+
 
     <title>
         <?php echo $_SESSION['usuario']; ?>
@@ -49,9 +51,9 @@ if (isset($_GET['materia'])) {
                 <input type="submit" class="logout-bt" value="Logout">
             </form>
         </div>
-
     </header>
-    <section class="listaConteudos"></section>
+
+    <section class="listaConteudos">
         <form action="#" method="GET">
             <select name="materia" id="materia">
                 <?php foreach ($materias as $materia): ?>
@@ -81,23 +83,19 @@ if (isset($_GET['materia'])) {
         }
         ?>
     </section>
-    </section>
 
-    <form action="/../../php/enviaEmail.php" method="post" class="formEmail">
-        <Label for="prof">Selecione o destinatário</Label>
-        <select name="prof" id="prof">
     <form action="/../../php/enviaEmail.php" method="post" class="formEmail">
         <Label for="prof">Selecione o destinatário</Label>
         <select name="prof" id="prof">
             <?php foreach ($professores as $professor): ?>
                 <option value="<?php echo $professor['nome']; ?>"><?php echo $professor['nome']; ?></option>
-                <option value="<?php echo $professor['nome']; ?>"><?php echo $professor['nome']; ?></option>
             <?php endforeach; ?>
         </select>
         <label for="mensagem">Mensagem</label><br>
-        <textarea name="mensagem" placeholder="Digite aqui a sua mensagem ao professor"></textarea><br>
-        <input type="submit" name="BTEnvia" value="Enviar" class="btnEmail">
-        <input type="reset" name="BTApaga" value="Apagar" class="btnEmail">
+        <div id="container">
+            <textarea id="editor" name="mensagem"></textarea>
+        </div>
+        <input type="submit" value="Enviar" class="btnEmail">
     </form>
 
     <section class="eventos">
@@ -105,6 +103,8 @@ if (isset($_GET['materia'])) {
         include('../../php/lista_eventos.php');
         ?>
     </section>
+    <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/super-build/ckeditor.js"></script>
+    <script src="/../../js/simpleTextEditor.js"></script>
     <script>
         document.getElementById('limpar').addEventListener('click', function () {
             const url = new URL(window.location.href);
