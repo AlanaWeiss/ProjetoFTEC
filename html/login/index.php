@@ -18,6 +18,7 @@ if (isset($_POST['mensagem'])) {
 
 <body>
   <main class="loginForm">
+    <img id="logo" src="../../css/assets/research.svg" alt="Lampada " />
     <h2>Entre na sua conta</h2>
     <form action="/php/validar_login.php" method="post">
       <label for="nome">Usuário:</label>
