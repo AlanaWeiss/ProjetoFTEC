@@ -15,6 +15,10 @@ $professores = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (isset($_GET['materia'])) {
     include('../../php/lista_conteudo.php');
 }
+
+$stmt = $pdo->prepare("SELECT nome, email FROM usuarios WHERE tipo = 'aluno'");
+$stmt->execute();
+$alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -137,6 +141,18 @@ if (isset($_GET['materia'])) {
     </div>
     </form>
 
+<div>
+  <table>
+    <?php foreach ($alunos as $aluno) { ?>
+      <tr>
+        <td><?php echo $aluno['nome']; ?></td>
+        <td><?php echo $aluno['email']; ?></td>
+      </tr>
+    <?php } ?>
+  </table>
+</div>
+
+    
     <section class="eventos">
         <?php
         include('../../php/lista_eventos.php');
