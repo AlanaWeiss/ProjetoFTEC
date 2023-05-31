@@ -17,7 +17,7 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-.formEmail, .listaConteudos {
+.formEmail, .listaConteudos, .areaColegas {
   width: 95%;
   margin: 0 auto;
   margin-top: 10px;
@@ -27,7 +27,7 @@ body {
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
 }
 
-.formEmail {
+.formEmail, .areaColegas {
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -68,7 +68,7 @@ textarea {
   height: 40px;
 }
 
-.buscaConteudo, .btnEmail {
+.buscaConteudo, .btnEmail, .btnColegas {
   width: 100px;
   background-color: #f39422;
   color: #fff;
@@ -79,8 +79,13 @@ textarea {
   cursor: pointer;
 }
 
-.btnEmail {
+.btnEmail, .btnColegas {
   margin-top: 20px;
+}
+
+.col-aluno,
+.col-email {
+    padding-right: 100px;
 }
 
 #sessao-usuario .barra-pesquisa{
