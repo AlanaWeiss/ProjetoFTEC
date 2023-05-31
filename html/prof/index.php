@@ -1,6 +1,7 @@
 <?php
-include_once('../../php/conexao.php');
+include('../../php/conexao.php');
 session_start();
+
 if (isset($_POST['mensagem'])) {
     echo '<script>alert("' . $_POST['mensagem'] . '");</script>';
 }
@@ -35,6 +36,8 @@ $materias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <header>
         <div id="sessao-usuario">
             <img class="logo-header" id="logo" src="../../css/assets/research.svg" alt="Lampada " />
+
+            <?php include('/../../html/avatar.php') ?>
 
             <form action="/php/logout.php" method="post">
                 <input type="submit" class="logout-bt" value="Logout">

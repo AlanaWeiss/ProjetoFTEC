@@ -47,12 +47,14 @@ if (isset($_GET['materia'])) {
 
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
 
     <header>
         <div id="sessao-usuario">
             <img class="logo-header" id="logo" src="../../css/assets/research.svg" alt="Lampada " />
+            
+            <?php include('/../../html/avatar.php') ?>
 
             <div class="esquerda">
 
@@ -146,41 +148,37 @@ if (isset($_GET['materia'])) {
     </form>
 
     <section class="areaColegas">
-    <button class="btnColegas" onclick="toggleContatos()">Colegas</button>
-    <div id="contatosDiv" style="display: none;">
-        <table style="margin-top:10px;">
-            <thead>
-                <tr>
-                    <th class="col-aluno">Aluno</th>
-                    <th class="col-email">Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($alunos as $aluno) { ?>
+        <button class="btnColegas" onclick="toggleContatos()">Colegas</button>
+        <div id="contatosDiv" style="display: none;">
+            <table style="margin-top:10px;">
+                <thead>
                     <tr>
-                        <td>
-                            <?php echo $aluno['nome']; ?>
-                        </td>
-                        <td>
-                            <?php echo $aluno['email']; ?>
-                        </td>
+                        <th class="col-aluno">Aluno</th>
+                        <th class="col-email">Email</th>
                     </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-    </div>
-</section>
-
-
-
-
-
+                </thead>
+                <tbody>
+                    <?php foreach ($alunos as $aluno) { ?>
+                        <tr>
+                            <td>
+                                <?php echo $aluno['nome']; ?>
+                            </td>
+                            <td>
+                                <?php echo $aluno['email']; ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
     <section class="eventos">
         <?php
         include('../../php/lista_eventos.php');
         ?>
     </section>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
@@ -193,16 +191,16 @@ if (isset($_GET['materia'])) {
             window.location.href = url.href;
         });
     </script>
-<script>
-    function toggleContatos() {
-        var contatosDiv = document.getElementById("contatosDiv");
-        if (contatosDiv.style.display === "none") {
-            contatosDiv.style.display = "block";
-        } else {
-            contatosDiv.style.display = "none";
+    <script>
+        function toggleContatos() {
+            var contatosDiv = document.getElementById("contatosDiv");
+            if (contatosDiv.style.display === "none") {
+                contatosDiv.style.display = "block";
+            } else {
+                contatosDiv.style.display = "none";
+            }
         }
-    }
-</script>
+    </script>
 
 </body>
 
