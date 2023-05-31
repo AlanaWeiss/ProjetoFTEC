@@ -54,7 +54,7 @@ if (isset($_GET['materia'])) {
         <div id="sessao-usuario">
             <img class="logo-header" id="logo" src="../../css/assets/research.svg" alt="Lampada " />
             
-            <?php include('/../../html/avatar.php') ?>
+            <?php include('../../html/geral/avatar.php') ?>
 
             <div class="esquerda">
 

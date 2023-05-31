@@ -1,5 +1,5 @@
 <?php
-include_once('/conexao.php');
+include('conexao.php');
 
 $_SESSION['usuario'];
 

@@ -37,7 +37,8 @@ $materias = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div id="sessao-usuario">
             <img class="logo-header" id="logo" src="../../css/assets/research.svg" alt="Lampada " />
 
-            <?php include('/../../html/avatar.php') ?>
+            <?php include('../../html/geral/avatar.php') ?>
+
 
             <form action="/php/logout.php" method="post">
                 <input type="submit" class="logout-bt" value="Logout">
