@@ -1,0 +1,56 @@
+body {
+  background-color: darkgrey;
+}
+.round-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: red;
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2F8b%2F16%2F7a%2F8b167af653c2399dd93b952a48740620.jpg&f=1&nofb=1&ipt=e6949240f4e54f988b92223f503b4199b30d4815c2d9ab4b160af1fcab0c25ea&ipo=images'); /* Substitua pelo caminho da sua imagem */
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+#dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #F39422;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  right: 0%;
+  border-radius: 5px;
+}
+
+#dropdown-menu li {
+  padding: 2px;
+  border-radius: 5px;
+}
+
+#dropdown-menu li:hover {
+  background-color: rgb(83, 126, 197);
+  border-radius: 5px;
+}
+
+.show {
+  display: block;
+}
+
+#dropdown-menu input[type="submit"] {
+  background-color: #F39422;
+  color: white;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
