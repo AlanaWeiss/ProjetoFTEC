@@ -12,6 +12,11 @@ $stmt = $pdo->prepare("SELECT nome FROM usuarios WHERE tipo = 'professor'");
 $stmt->execute();
 $professores = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+//busca nome e email de outros alunos
+$stmt = $pdo->prepare("SELECT nome, email FROM usuarios WHERE tipo = 'aluno'");
+$stmt->execute();
+$alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 if (isset($_GET['materia'])) {
     include('../../php/lista_conteudo.php');
 }
@@ -42,19 +47,24 @@ if (isset($_GET['materia'])) {
 
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
 
     <header>
         <div id="sessao-usuario">
             <img class="logo-header" id="logo" src="../../css/assets/research.svg" alt="Lampada " />
+            
+            <?php include('../../html/geral/avatar.php') ?>
 
             <div class="esquerda">
+
+                <!-- BUSCA CONTEUDO -->
                 <form action="/php/busca.php" method="post" class="barra-pesquisa">
                     <input type="text" name="search" placeholder="Digite sua pesquisa...">
                     <button type="submit" class="buscaConteudo btn-search"><i class="material-icons">search</i></button>
                 </form>
 
+                <!-- LOGOUT -->
                 <form action="/php/logout.php" method="post">
                     <input type="submit" class="logout-bt" value="Logout">
                 </form>
@@ -115,33 +125,60 @@ if (isset($_GET['materia'])) {
     </section>
 
     <form action="/../../php/enviaEmail.php" method="post" class="formEmail">
-    <div>
-        <span class="span-title">Entre em contato: </span>
-        <br>
-        <Label for="prof">Selecione o destinatário</Label>
-        <br>
-        <select name="prof" id="prof">
-            <?php foreach ($professores as $professor): ?>
-                <option value="<?php echo $professor['nome']; ?>"><?php echo $professor['nome']; ?></option>
-            <?php endforeach; ?>
-        </select>
-    </div>
-    <div>
-        <label for="mensagem">Mensagem</label><br>
-        <div id="container">
-            <textarea id="editor" name="mensagem"></textarea>
+        <div>
+            <span class="span-title">Entre em contato: </span>
+            <br>
+            <Label for="prof">Selecione o destinatário</Label>
+            <br>
+            <select name="prof" id="prof">
+                <?php foreach ($professores as $professor): ?>
+                    <option value="<?php echo $professor['nome']; ?>"><?php echo $professor['nome']; ?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
-    </div>
-    <div>
-        <input type="submit" name="BTEnvia" value="Enviar" class="btnEmail">
-    </div>
+        <div>
+            <label for="mensagem">Mensagem</label><br>
+            <div id="container">
+                <textarea id="editor" name="mensagem"></textarea>
+            </div>
+        </div>
+        <div>
+            <input type="submit" name="BTEnvia" value="Enviar" class="btnEmail">
+        </div>
     </form>
+
+    <section class="areaColegas">
+        <button class="btnColegas" onclick="toggleContatos()">Colegas</button>
+        <div id="contatosDiv" style="display: none;">
+            <table style="margin-top:10px;">
+                <thead>
+                    <tr>
+                        <th class="col-aluno">Aluno</th>
+                        <th class="col-email">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($alunos as $aluno) { ?>
+                        <tr>
+                            <td>
+                                <?php echo $aluno['nome']; ?>
+                            </td>
+                            <td>
+                                <?php echo $aluno['email']; ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
     <section class="eventos">
         <?php
         include('../../php/lista_eventos.php');
         ?>
     </section>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
@@ -154,7 +191,16 @@ if (isset($_GET['materia'])) {
             window.location.href = url.href;
         });
     </script>
-
+    <script>
+        function toggleContatos() {
+            var contatosDiv = document.getElementById("contatosDiv");
+            if (contatosDiv.style.display === "none") {
+                contatosDiv.style.display = "block";
+            } else {
+                contatosDiv.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 
