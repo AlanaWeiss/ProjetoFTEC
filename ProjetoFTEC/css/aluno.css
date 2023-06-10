@@ -1,0 +1,140 @@
+:root {
+  --fonte-12: 12px;
+  --fonte-14: 14px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.formEmail, .listaConteudos, .areaColegas {
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 10px;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+}
+
+.formEmail, .areaColegas {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+main, .eventos-container {
+  width: 80%;
+  background-color: #537ec5;
+  margin: 0 auto;
+  margin-top: 100px;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+}
+.eventos-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+h2 {
+  margin-top: 0;
+  font-weight: bold;
+}
+
+label {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+}
+
+input[type="text"],
+textarea {
+  width: 90%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: var(--fonte-12);
+  height: 40px;
+}
+
+.buscaConteudo, .btnEmail, .btnColegas {
+  width: 100px;
+  background-color: #f39422;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: var(--fonte-12);
+  cursor: pointer;
+}
+
+.btnEmail, .btnColegas {
+  margin-top: 20px;
+}
+
+.col-aluno,
+.col-email {
+    padding-right: 100px;
+}
+
+#sessao-usuario .barra-pesquisa{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button.buscaConteudo.btn-search {
+  margin: 0;
+  width: auto;
+  margin-right: 10px;
+}
+
+.btn-search i {
+  font-size: var(--fonte-12);
+}
+
+#sessao-usuario > .esquerda {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#sessao-usuario .logo-header {
+  width: 45px;
+  padding: 5px;
+}
+
+.selecao {
+  display: flex;
+}
+
+.selecao div {
+  text-align: left;
+}
+
+.span-title {
+  font-size: var(--font-16);
+  font-weight: bold;
+}
+
+.selecao form {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.selecao form {
+  height: 40px;
+  margin-top: 5px;
+}
