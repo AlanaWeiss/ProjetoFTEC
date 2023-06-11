@@ -201,7 +201,5 @@ if (isset($_GET['materia'])) {
             }
         }
     </script>
-
 </body>
-
 </html>
