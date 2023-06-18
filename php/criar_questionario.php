@@ -18,3 +18,4 @@ if ($cad_quest->rowCount()) {
 }
 
 echo json_encode($retorna);
+

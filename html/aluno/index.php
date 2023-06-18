@@ -3,16 +3,16 @@ include('../../php/conexao.php');
 session_start();
 
 //lista materias com conteudo cadastrado
-$stmt = $pdo->prepare('SELECT DISTINCT materia FROM conteudos');
+$stmt = $pdo->prepare('SELECT nome FROM usuarios');
 $stmt->execute();
 $materias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-//lista professores para email
+// lista professores para email
 $stmt = $pdo->prepare("SELECT nome FROM usuarios WHERE tipo = 'professor'");
 $stmt->execute();
 $professores = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-//busca nome e email de outros alunos
+// busca nome e email de outros alunos
 $stmt = $pdo->prepare("SELECT nome, email FROM usuarios WHERE tipo = 'aluno'");
 $stmt->execute();
 $alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -20,6 +20,7 @@ $alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (isset($_GET['materia'])) {
     include('../../php/lista_conteudo.php');
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +54,7 @@ if (isset($_GET['materia'])) {
     <header>
         <div id="sessao-usuario">
             <img class="logo-header" id="logo" src="../../css/assets/research.svg" alt="Lampada " />
-            
+
             <?php include('../../html/geral/avatar.php') ?>
 
             <div class="esquerda">
@@ -78,14 +79,26 @@ if (isset($_GET['materia'])) {
                 <?php echo 'Bem-vindo, ' . $_SESSION['usuario'] . '!'; ?>
             </span>
             <form action=# method="GET">
-                <select name="materia" id="materia">
-                    <?php foreach ($materias as $materia): ?>
-                        <option value="<?php echo $materia['materia']; ?>"><?php echo $materia['materia']; ?></option>
+
+                <!-- SE FOR RODAR LOCAL, UTILIZAR ESSE TRECHO -->
+                <!-- <select name="materia" id="materia">
+                    <?php //foreach ($materias as $materia): ?>
+                        <option value="<?php //echo $materia['materia']; ?>"><?php //echo $materia['materia']; ?></option>
+                    <?php //endforeach; ?>
+                </select><br> -->
+
+                <!-- SE FOR RODAR NO SERVIDOR, UTILIZAR ESSE TRECHO -->
+                <select name="materia2" id="materia2">
+                    <?php foreach ($materias as $material): ?>
+                        <option value="<?php echo $material; ?>"><?php echo $material; ?></option>
                     <?php endforeach; ?>
                 </select><br>
+
+
                 <input type="submit" value="Buscar" class="buscaConteudo">
                 <button type="button" id="limpar" class="buscaConteudo">Limpar</button>
             </form>
+            
         </div>
     </section>
 
@@ -178,7 +191,7 @@ if (isset($_GET['materia'])) {
         include('../../php/lista_eventos.php');
         ?>
     </section>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
@@ -202,4 +215,5 @@ if (isset($_GET['materia'])) {
         }
     </script>
 </body>
+
 </html>

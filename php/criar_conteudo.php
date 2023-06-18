@@ -2,10 +2,10 @@
 session_start();
 include_once('./conexao.php');
 
-$titulo = $_POST['titulo'] ?? '';
-$conteudo = $_POST['conteudo'] ?? '';
-$nome = $_SESSION['usuario'] ?? '';
-$materia = $_POST['materia'] ?? '';
+$titulo = $_POST['titulo'];
+$conteudo = $_POST['conteudo'];
+$nome = $_SESSION['usuario'];
+$materia = $_POST['materia'];
 $sucesso = 0;
 
 $stmt = $pdo->prepare("INSERT INTO conteudos (titulo, conteudo, nome, materia)
