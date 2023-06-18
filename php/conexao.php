@@ -12,7 +12,7 @@ if (!file_exists($db_file)) {
     }
 
     // Inclui o script de criação do banco de dados
-    // include('./cria_banco.php');
+    include('cria_banco.php');
 } else {
     // Se o arquivo do banco de dados já existe, apenas conecta ao banco
     try {

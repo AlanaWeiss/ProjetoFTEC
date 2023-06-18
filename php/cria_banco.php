@@ -1,5 +1,5 @@
 <?php
-include_once('./conexao.php');
+include_once('conexao.php');
 
 #region Primeira tabela: tipos
 $pdo->exec("
@@ -118,6 +118,43 @@ CREATE TABLE IF NOT EXISTS eventos (
     titulo TEXT NOT NULL,
     descricao TEXT NOT NULL,
     criado_por TEXT NOT NULL
+)");
+#endregion
+
+
+#region Tabelas referentes ao questionario
+$pdo->exec("
+CREATE TABLE IF NOT EXISTS questionario (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descricao TEXT NOT NULL,
+    materia TEXT NOT NULL,
+    FOREIGN KEY (materia) REFERENCES materias(materia)
+)");
+
+$pdo->exec("
+CREATE TABLE IF NOT EXISTS pergunta (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    questionario INTEGER NOT NULL,
+    enunciado TEXT NOT NULL,
+    FOREIGN KEY (questionario) REFERENCES questionario(id)
+)");
+
+$pdo->exec("
+CREATE TABLE IF NOT EXISTS alternativa (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descricao TEXT NOT NULL,
+    correta INTEGER NOT NULL,
+    idPergunta INTEGER NOT NULL,
+    FOREIGN KEY (idPergunta) REFERENCES pergunta(id)
+)");
+
+$pdo->exec("CREATE TABLE alternativaPergunta (
+	id	INTEGER,
+	idAlternativa	TEXT NOT NULL,
+    idPergunta	INTEGER NOT NULL,
+	FOREIGN KEY(idAlternativa) REFERENCES alternativa(id),
+	FOREIGN KEY(idPergunta) REFERENCES pergunta(id),
+	PRIMARY KEY(id AUTOINCREMENT)
 )");
 #endregion
 
