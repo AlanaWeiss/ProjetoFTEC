@@ -67,6 +67,7 @@ $questionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <!-- SE FOR RODAR NO SERVIDOR, UTILIZAR ESSE TRECHO -->
                 <select name="materia" id="materia" required>
+
                     <?php foreach ($materias as $materia): ?>
                         <option value="<?php echo $materia; ?>"><?php echo $materia; ?></option>
                     <?php endforeach; ?>
@@ -127,6 +128,7 @@ $questionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </section>
     </main>
 
+
     <!-- MODAL NOVO QUESTIONÁRIO -->
     <div class="modal fade" id="questModal" tabindex="-1" aria-labelledby="questModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -146,9 +148,10 @@ $questionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <label for="materia" class="col-2">Matéria:</label>
                             <select name="materia" id="materia" required>
                                 <?php foreach ($materias as $materia) : ?>
+
                                     <option value="<?php echo $materia; ?>">
                                         <?php echo $materia; ?>
-                                    </option>
+                      </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -163,7 +166,9 @@ $questionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 
+
 <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/super-build/ckeditor.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
 

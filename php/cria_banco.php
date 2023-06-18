@@ -14,14 +14,14 @@ $tipos = array(
 );
 
 // Loop para percorrer o array de tipos
-foreach($tipos as $tipo) {
+foreach ($tipos as $tipo) {
     // Verifica se o tipo já existe na tabela
     $stmt = $pdo->prepare("SELECT tipo FROM tipos WHERE tipo = ?");
     $stmt->execute([$tipo]);
     $resultado = $stmt->fetch();
 
     // Se o tipo não existir, insere na tabela
-    if(!$resultado) {
+    if (!$resultado) {
         $stmt = $pdo->prepare("INSERT INTO tipos (tipo) VALUES (?)");
         $stmt->execute([$tipo]);
     }
@@ -52,14 +52,14 @@ $materias = array(
 );
 
 // Loop para percorrer o array de materias
-foreach($materias as $materia) {
+foreach ($materias as $materia) {
     // Verifica se a materia já existe na tabela
     $stmt = $pdo->prepare("SELECT materia FROM materias WHERE materia = ?");
     $stmt->execute([$materia]);
     $resultado = $stmt->fetch();
 
     // Se a materia não existir, insere na tabela
-    if(!$resultado) {
+    if (!$resultado) {
         $stmt = $pdo->prepare("INSERT INTO materias (materia) VALUES (?)");
         $stmt->execute([$materia]);
     }
@@ -88,7 +88,23 @@ $stmt->execute([$nome]);
 $resultado = $stmt->fetch();
 
 // Se o usuário não existir, insere na tabela
-if(!$resultado) {
+if (!$resultado) {
+    $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha, tipo) VALUES (?, ?, ?, ?)");
+    $stmt->execute([$nome, $email, $senha, $tipo]);
+}
+
+$nome = "prof";
+$email = "prof@example.com";
+$senha = "admin";
+$tipo = "professor";
+
+// Verifica se o usuário já existe na tabela
+$stmt = $pdo->prepare("SELECT nome FROM usuarios WHERE nome = ?");
+$stmt->execute([$nome]);
+$resultado = $stmt->fetch();
+
+// Se o usuário não existir, insere na tabela
+if (!$resultado) {
     $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha, tipo) VALUES (?, ?, ?, ?)");
     $stmt->execute([$nome, $email, $senha, $tipo]);
 }
@@ -143,7 +159,6 @@ $pdo->exec("
 CREATE TABLE IF NOT EXISTS alternativa (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     descricao TEXT NOT NULL,
-    correta INTEGER NOT NULL,
     idPergunta INTEGER NOT NULL,
     FOREIGN KEY (idPergunta) REFERENCES pergunta(id)
 )");
@@ -157,5 +172,3 @@ $pdo->exec("CREATE TABLE alternativaPergunta (
 	PRIMARY KEY(id AUTOINCREMENT)
 )");
 #endregion
-
-?>
