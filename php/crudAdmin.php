@@ -50,7 +50,7 @@ function cadastroUsuarioNovo($nome, $email, $senha, $tipo)
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $tipo = $_POST['tipo'];
-    $defaultImagePath = './../css/assets/smile.png';
+    $defaultImagePath = 'smile.png';
     $fotoData = file_get_contents($defaultImagePath);
     $fotoBase64 = base64_encode($fotoData);
 
