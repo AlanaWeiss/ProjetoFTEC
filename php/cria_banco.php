@@ -157,7 +157,6 @@ $pdo->exec("
 CREATE TABLE IF NOT EXISTS alternativa (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     descricao TEXT NOT NULL,
-    correta INTEGER NOT NULL,
     idPergunta INTEGER NOT NULL,
     FOREIGN KEY (idPergunta) REFERENCES pergunta(id)
 )");
