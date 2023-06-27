@@ -1,18 +1,25 @@
 <?php
 include_once('./conexao.php');
 
+
+
 $nome = $_POST['nome'];
 $email = $_POST['email'];
 $senha = $_POST['senha'];
 $tipo = $_POST['tipo'];
+$fotoPath = './../css/assets/smile.png';
+$fotoData = file_get_contents($fotoPath);
+$fotoBase64 = base64_encode($fotoData);
 
-$stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha, tipo)
-                       VALUES (:nome, :email, :senha, :tipo)");
+$stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha, tipo, foto)
+                       VALUES (:nome, :email, :senha, :tipo, :foto)");
 
 $stmt->bindParam(':nome', $nome);
 $stmt->bindParam(':email', $email);
 $stmt->bindParam(':senha', $senha);
 $stmt->bindParam(':tipo', $tipo);
+$stmt->bindParam(':foto', $fotoBase64);
+
 $stmt->execute();
 
 if ($stmt->rowCount() > 0) {

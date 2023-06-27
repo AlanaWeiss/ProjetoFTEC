@@ -96,7 +96,7 @@ textarea {
 }
 
 button.buscaConteudo.btn-search {
-  margin: 2px;
+  margin: 0;
   width: auto;
   margin-right: 10px;
 }
@@ -138,5 +138,3 @@ button.buscaConteudo.btn-search {
   height: 40px;
   margin-top: 5px;
 }
-
-

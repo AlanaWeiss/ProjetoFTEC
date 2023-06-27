@@ -68,14 +68,37 @@ textarea {
   margin-top: 5px;
 }
 
-.cadConteudo, .cadEvento {
+input[type="button"], .btnCriarPergunta, .btnCriarQuest {
   width: 50%;
   background-color: #f39422;
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px;
-  font-size: var( --fonte-12);
+  font-size: var( --fonte-14);
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.btnSalvarQuest, .btnAddAlter{
+  background-color: #f39422;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px 10px 20px;
+  font-size: var( --fonte-14);
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.cadConteudo, .cadEvento{
+  width: 50%;
+  background-color: #f39422;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: var( --fonte-14);
   margin-top: 20px;
   cursor: pointer;
 }
