@@ -33,6 +33,7 @@ if (isset($_GET['materia'])) {
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="../../css/aluno.css">
     <link rel="stylesheet" href="../../css/geral.css">
+    <link rel="stylesheet" href="../../css/questionarioaluno.css">
     <link rel="stylesheet" href="../../css/textEditor.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +63,7 @@ if (isset($_GET['materia'])) {
                 <!-- BUSCA CONTEUDO -->
                 <form action="/php/busca.php" method="post" class="barra-pesquisa">
                     <input type="text" name="search" placeholder="Digite sua pesquisa...">
-                    <button type="submit" class="buscaConteudo btn-search"><i class="material-icons">search</i></button>
+                    <button type="submit" class="buscaConteudo btn-search btnHovers"><i class="material-icons">search</i></button>
                 </form>
 
                 <!-- LOGOUT -->
@@ -80,8 +81,8 @@ if (isset($_GET['materia'])) {
             </span>
             <form action=# method="GET">
 
-                <!-- SE FOR RODAR LOCAL, UTILIZAR ESSE TRECHO -->
-                <!-- <select name="materia" id="materia">
+                <!-- SE FOR RODAR LOCAL, UTILIZAR ESSE TRECHO
+                <select name="materia" id="materia">
                     <?php //foreach ($materias as $materia): ?>
                         <option value="<?php //echo $materia['materia']; ?>"><?php //echo $materia['materia']; ?></option>
                     <?php //endforeach; ?>
@@ -96,7 +97,7 @@ if (isset($_GET['materia'])) {
 
 
                 <input type="submit" value="Buscar" class="buscaConteudo">
-                <button type="button" id="limpar" class="buscaConteudo">Limpar</button>
+                <button type="button" id="limpar" class="buscaConteudo btnHovers">Limpar</button>
             </form>
             
         </div>
@@ -137,6 +138,47 @@ if (isset($_GET['materia'])) {
         ?>
     </section>
 
+    <form id="quiz-form">
+    <h1>Questionário</h1>
+    <div class="question">
+      <p>1. Questão 1</p>
+      <div class="options">
+        <label class="label-quest"> <input type="radio" name="q1" value="a"> a) Alternativa A </label>
+        <label class="label-quest"> <input type="radio" name="q1" value="b"> b) Alternativa B </label>
+        <label class="label-quest"> <input type="radio" name="q1" value="c"> c) Alternativa C </label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>2. Questão 2</p>
+      <div class="options">
+        <label class="label-quest"> <input type="radio" name="q2" value="a"> a) Alternativa A </label>
+        <label class="label-quest"> <input type="radio" name="q2" value="b"> b) Alternativa B </label>
+        <label class="label-quest"> <input type="radio" name="q2" value="c"> c) Alternativa C </label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>3. Questão 3</p>
+      <div class="options">
+        <label class="label-quest"> <input type="radio" name="q3" value="a"> a) Alternativa A </label>
+        <label class="label-quest"> <input type="radio" name="q3" value="b"> b) Alternativa B </label>
+        <label class="label-quest"> <input type="radio" name="q3" value="c"> c) Alternativa C </label>
+      </div>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-button btnHovers">Enviar</button>
+  </form>
+
+  <div id="result" style="display: none;">
+    <h2>Resultado</h2>
+    <p id="score"></p>
+  </div>
+
+</body>
+</html>
+
     <form action="/../../php/enviaEmail.php" method="post" class="formEmail">
         <div>
             <span class="span-title">Entre em contato: </span>
@@ -161,7 +203,7 @@ if (isset($_GET['materia'])) {
     </form>
 
     <section class="areaColegas">
-        <button class="btnColegas" onclick="toggleContatos()">Colegas</button>
+        <button class="btnColegas btnHovers" onclick="toggleContatos()">Colegas</button>
         <div id="contatosDiv" style="display: none;">
             <table style="margin-top:10px;">
                 <thead>
@@ -214,6 +256,7 @@ if (isset($_GET['materia'])) {
             }
         }
     </script>
+    <script src="/../../js/resultadoquiz.js"></script>
 </body>
 
 </html>
