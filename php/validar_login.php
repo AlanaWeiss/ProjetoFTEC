@@ -1,5 +1,5 @@
 <?php
-include_once('./conexao.php');
+include_once('conexao.php');
 
 $nome = strtolower($_POST['nome']);
 $senha = $_POST['senha'];
@@ -18,13 +18,13 @@ if ($usuarios == null) {
     session_start();
     $_SESSION['usuario'] = $usuarios[0]['nome'];
     if ($usuarios[0]['tipo'] == 'administrador') {
-        header('Location: /../../html/admin');
+        header('Location: ../html/admin');
     }
     if ($usuarios[0]['tipo'] == 'professor') {
-        header('Location: /../../html/prof');
+        header('Location: ../html/prof');
     }
     if ($usuarios[0]['tipo'] == 'aluno') {
-        header('Location: /../../html/aluno');
+        header('Location: ../html/aluno');
     }
 }
 

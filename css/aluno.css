@@ -68,7 +68,7 @@ textarea {
   height: 40px;
 }
 
-.buscaConteudo, .btnEmail, .btnColegas {
+.buscaConteudo, .btnEmail, .btnColegas, .btnResposta, .btnRespoderQuestionario {
   width: 100px;
   background-color: #f39422;
   color: #fff;

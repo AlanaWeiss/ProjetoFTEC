@@ -59,18 +59,21 @@ $questionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <h2>Cadastrar um novo conteudo</h2><br>
 
                 <!-- SE FOR RODAR LOCAL, UTILIZAR ESSE TRECHO -->
-                <!-- <select name="materia" id="materia" required>
-                    <?php // foreach ($materias as $materia): ?>
-                        <option value="<?php // echo $materia['materia']; ?>"><?php // echo $materia['materia']; ?></option>
-                    <?php // endforeach; ?>
-                </select> -->
+                 <select name="materia" id="materia" required>
+                    <?php  foreach ($materias as $materia): ?>
+                        <option value="<?php  echo $materia['materia']; ?>"><?php  echo $materia['materia']; ?></option>
+                    <?php  endforeach; ?>
+                </select> 
 
                 <!-- SE FOR RODAR NO SERVIDOR, UTILIZAR ESSE TRECHO -->
                 <select name="materia" id="materia" required>
 
-                    <?php foreach ($materias as $materia): ?>
-                        <option value="<?php echo $materia; ?>"><?php echo $materia; ?></option>
-                    <?php endforeach; ?>
+                    <?php foreach ($materias as $materia){
+                        extract($materia);
+                        echo "<option value='$materia'>$materia</option>";
+                    } 
+                    ?>
+                    <?php //endforeach; ?>
                 </select><br>
 
                 <div>
@@ -147,15 +150,14 @@ $questionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <div class="mb-3">
                             <label for="materia" class="col-2">Matéria:</label>
                             <select name="materia" id="materia" required>
-                                <?php foreach ($materias as $materia) : ?>
-
-                                    <option value="<?php echo $materia; ?>">
-                                        <?php echo $materia; ?>
-                      </option>
-                                <?php endforeach; ?>
+                                <?php foreach ($materias as $materia){
+                                        extract($materia);
+                                        echo "<option>$materia</option>";
+                                    }
+                                ?>
                             </select>
                         </div>
-
+    
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
                             <button id="cad-quest-btn" type="submit" class="btnSalvarQuest btnHovers">Salvar</button>
