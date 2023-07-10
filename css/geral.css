@@ -43,7 +43,7 @@ header {
   margin-top: 0;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, .btnHovers:hover{
   background-color: #f4a23e;
 }
 

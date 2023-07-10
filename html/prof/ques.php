@@ -65,7 +65,7 @@ $questionarioId  = $_GET['id'];
         </section>
 
         <section class="section">
-            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#perguntaModal">
+            <button type="button" class="btnCriarPergunta btnHovers" data-bs-toggle="modal" data-bs-target="#perguntaModal">
                 Criar pergunta
             </button>
             <strong class="d-block mt-4 mb-4">Perguntas criadas: </strong>
@@ -117,7 +117,7 @@ $questionarioId  = $_GET['id'];
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
-                                <button id="cad-enunc-btn" type="submit" class="btn btn-dark">Adicionar
+                                <button id="cad-enunc-btn" type="submit" class="btnAddAlter btnHovers">Adicionar
                                     Alternativas</button>
                             </div>
                         </form>
@@ -162,7 +162,7 @@ $questionarioId  = $_GET['id'];
                             </div>
 
                             <div class="modal-footer">
-                                <button id="cad-alt-btn" type="submit" class="btn btn-dark">Salvar</button>
+                                <button id="cad-alt-btn" type="submit" class="btnSalvarQuest btnHovers">Salvar</button>
                             </div>
                         </form>
                     </div>

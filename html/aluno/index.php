@@ -1,9 +1,12 @@
 <?php
-include('../../php/conexao.php');
 session_start();
+include('../../php/conexao.php');
+// require_once '../../php/conexao.php';
+
 
 //lista materias com conteudo cadastrado
-$stmt = $pdo->prepare('SELECT nome FROM usuarios');
+// $stmt = $pdo->prepare('SELECT nome FROM usuarios');
+$stmt = $pdo->prepare("SELECT materia FROM materias");
 $stmt->execute();
 $materias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -16,6 +19,11 @@ $professores = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $stmt = $pdo->prepare("SELECT nome, email FROM usuarios WHERE tipo = 'aluno'");
 $stmt->execute();
 $alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//lista materias com questionario cadastrado
+$stmt = $pdo->prepare("SELECT materia FROM questionario GROUP BY materia");
+$stmt->execute();
+$materiasQuest = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if (isset($_GET['materia'])) {
     include('../../php/lista_conteudo.php');
@@ -33,6 +41,7 @@ if (isset($_GET['materia'])) {
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="../../css/aluno.css">
     <link rel="stylesheet" href="../../css/geral.css">
+    <link rel="stylesheet" href="../../css/questionarioaluno.css">
     <link rel="stylesheet" href="../../css/textEditor.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +71,7 @@ if (isset($_GET['materia'])) {
                 <!-- BUSCA CONTEUDO -->
                 <form action="/php/busca.php" method="post" class="barra-pesquisa">
                     <input type="text" name="search" placeholder="Digite sua pesquisa...">
-                    <button type="submit" class="buscaConteudo btn-search"><i class="material-icons">search</i></button>
+                    <button type="submit" class="buscaConteudo btn-search btnHovers"><i class="material-icons">search</i></button>
                 </form>
 
                 <!-- LOGOUT -->
@@ -80,27 +89,29 @@ if (isset($_GET['materia'])) {
             </span>
             <form action=# method="GET">
 
-                <!-- SE FOR RODAR LOCAL, UTILIZAR ESSE TRECHO -->
-                <!-- <select name="materia" id="materia">
-                    <?php //foreach ($materias as $materia): ?>
-                        <option value="<?php //echo $materia['materia']; ?>"><?php //echo $materia['materia']; ?></option>
-                    <?php //endforeach; ?>
-                </select><br> -->
-
-                <!-- SE FOR RODAR NO SERVIDOR, UTILIZAR ESSE TRECHO -->
-                <select name="materia2" id="materia2">
-                    <?php foreach ($materias as $material): ?>
-                        <option value="<?php echo $material; ?>"><?php echo $material; ?></option>
+                <!-- SE FOR RODAR LOCAL, UTILIZAR ESSE TRECHO-->
+                <?php //var_dump($materias); ?>
+                <select name="materia" id="materia">
+                    <?php foreach ($materias as $materia): ?>
+                        <option value="<?php echo $materia['materia']; ?>"><?php echo $materia['materia']; ?></option>
                     <?php endforeach; ?>
-                </select><br>
+                </select><br> 
+
+                <!-- SE FOR RODAR NO SERVIDOR, UTILIZAR ESSE TRECHO
+                <select name="materia2" id="materia2">
+                    <?php //foreach ($materias as $material): ?>
+                        <option value="<?php //echo $material; ?>"><?php //echo $material; ?></option>
+                    <?php //endforeach; ?>
+                </select><br>-->
 
 
                 <input type="submit" value="Buscar" class="buscaConteudo">
-                <button type="button" id="limpar" class="buscaConteudo">Limpar</button>
+                <button type="button" id="limpar" class="buscaConteudo btnHovers">Limpar</button>
             </form>
             
         </div>
     </section>
+
 
     <section class="listaConteudos">
         <?php
@@ -137,7 +148,76 @@ if (isset($_GET['materia'])) {
         ?>
     </section>
 
+
+    <!-- DAQUI PARA BAIXO -->
+    <section class="listaConteudos selecao">
+    <div>
+        <form action="#" method="GET">
+
+            <?php //var_dump($materias); ?>
+            <select name="materiaQuest" id="materiaQuest">
+                <?php foreach ($materiasQuest as $materiaQuest): ?>
+                    <option value="<?php echo $materiaQuest['materia']; ?>"><?php echo $materiaQuest['materia']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select><br>
+
+            <input type="submit" name="buscarQuest" value="Buscar" class="buscaConteudo">
+            <button type="button" id="limparQuest" class="buscaConteudo btnHovers">Limpar</button>
+        </form>
+    </div>
+</section>
+
+<section class="listaConteudos" style="text-align:left" id="quest">
+    <?php
+    if (isset($_GET['buscarQuest'])) { // Verifica se o botão "BuscarQuest" foi clicado
+        if (!empty($_GET['materiaQuest'])) { // Verifica se a matéria foi selecionada
+            $stmt = $pdo->prepare("SELECT * FROM pergunta INNER JOIN alternativa ON pergunta.id=alternativa.idPergunta");
+            $stmt->execute();
+            $questoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $chk = "palamar";
+            foreach ($questoes as $questao) {
+                if ($chk !== $questao['enunciado']) {
+                    echo "<hr>";
+                    echo "<h3>" . $questao['enunciado'] . "</h3>";
+                }
+                echo "<div>";
+                echo "<input type='radio' name='" . $questao['idPergunta'] . "' value='" . $questao['idPergunta'] . "'>";
+                echo $questao['descricao'] . "<br>";
+                echo "</div>";
+
+                $chk = $questao['enunciado'];
+            }
+        } else {
+            echo '<div id="empty-message">Selecione uma matéria para exibir os questionários.</div>';
+        }
+    }
+    ?>
+    <div>
+        <input type="submit" name="BTEnvia" value="Enviar" class="btnEmail">
+    </div>
+</section>
+
+<script>
+    document.getElementById("limparQuest").addEventListener("click", function () {
+        document.querySelector('#quest').innerHTML = "";
+    });
+</script>
+
+
+
+
+
+<!-- DAQUI PARA CIMA -->
+
+
+
+    </form>
+
     <form action="/../../php/enviaEmail.php" method="post" class="formEmail">
+
+
+    
         <div>
             <span class="span-title">Entre em contato: </span>
             <br>
@@ -161,7 +241,7 @@ if (isset($_GET['materia'])) {
     </form>
 
     <section class="areaColegas">
-        <button class="btnColegas" onclick="toggleContatos()">Colegas</button>
+        <button class="btnColegas btnHovers" onclick="toggleContatos()">Colegas</button>
         <div id="contatosDiv" style="display: none;">
             <table style="margin-top:10px;">
                 <thead>
@@ -197,15 +277,13 @@ if (isset($_GET['materia'])) {
         crossorigin="anonymous"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/super-build/ckeditor.js"></script>
     <script src="/../../js/simpleTextEditor.js"></script>
-    <script>
-        document.getElementById('limpar').addEventListener('click', function () {
+    <script>document.getElementById('limpar').addEventListener('click', function () {
             const url = new URL(window.location.href);
             url.searchParams.delete('materia');
             window.location.href = url.href;
         });
     </script>
-    <script>
-        function toggleContatos() {
+    <script>function toggleContatos() {
             var contatosDiv = document.getElementById("contatosDiv");
             if (contatosDiv.style.display === "none") {
                 contatosDiv.style.display = "block";
@@ -214,6 +292,7 @@ if (isset($_GET['materia'])) {
             }
         }
     </script>
+    <script src="/../../js/resultadoquiz.js"></script>
 </body>
 
 </html>
