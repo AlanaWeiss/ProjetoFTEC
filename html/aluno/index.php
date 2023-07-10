@@ -1,12 +1,9 @@
 <?php
-session_start();
 include('../../php/conexao.php');
-// require_once '../../php/conexao.php';
-
+session_start();
 
 //lista materias com conteudo cadastrado
-// $stmt = $pdo->prepare('SELECT nome FROM usuarios');
-$stmt = $pdo->prepare("SELECT materia FROM materias");
+$stmt = $pdo->prepare('SELECT nome FROM usuarios');
 $stmt->execute();
 $materias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -84,20 +81,19 @@ if (isset($_GET['materia'])) {
             </span>
             <form action=# method="GET">
 
-                <!-- SE FOR RODAR LOCAL, UTILIZAR ESSE TRECHO-->
-                <?php //var_dump($materias); ?>
+                <!-- SE FOR RODAR LOCAL, UTILIZAR ESSE TRECHO
                 <select name="materia" id="materia">
-                    <?php foreach ($materias as $materia): ?>
-                        <option value="<?php echo $materia['materia']; ?>"><?php echo $materia['materia']; ?></option>
-                    <?php endforeach; ?>
-                </select><br> 
-
-                <!-- SE FOR RODAR NO SERVIDOR, UTILIZAR ESSE TRECHO
-                <select name="materia2" id="materia2">
-                    <?php //foreach ($materias as $material): ?>
-                        <option value="<?php //echo $material; ?>"><?php //echo $material; ?></option>
+                    <?php //foreach ($materias as $materia): ?>
+                        <option value="<?php //echo $materia['materia']; ?>"><?php //echo $materia['materia']; ?></option>
                     <?php //endforeach; ?>
-                </select><br>-->
+                </select><br> -->
+
+                <!-- SE FOR RODAR NO SERVIDOR, UTILIZAR ESSE TRECHO -->
+                <select name="materia2" id="materia2">
+                    <?php foreach ($materias as $material): ?>
+                        <option value="<?php echo $material; ?>"><?php echo $material; ?></option>
+                    <?php endforeach; ?>
+                </select><br>
 
 
                 <input type="submit" value="Buscar" class="buscaConteudo">
@@ -132,7 +128,6 @@ if (isset($_GET['materia'])) {
                 echo '</div>';
 
                 $index++; // Incrementa o contador
-                
             }
 
             // Close the accordion container
@@ -143,17 +138,47 @@ if (isset($_GET['materia'])) {
         ?>
     </section>
 
+    <form id="quiz-form">
+    <h1>Questionário</h1>
+    <div class="question">
+      <p>1. Questão 1</p>
+      <div class="options">
+        <label class="label-quest"> <input type="radio" name="q1" value="a"> a) Alternativa A </label>
+        <label class="label-quest"> <input type="radio" name="q1" value="b"> b) Alternativa B </label>
+        <label class="label-quest"> <input type="radio" name="q1" value="c"> c) Alternativa C </label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>2. Questão 2</p>
+      <div class="options">
+        <label class="label-quest"> <input type="radio" name="q2" value="a"> a) Alternativa A </label>
+        <label class="label-quest"> <input type="radio" name="q2" value="b"> b) Alternativa B </label>
+        <label class="label-quest"> <input type="radio" name="q2" value="c"> c) Alternativa C </label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>3. Questão 3</p>
+      <div class="options">
+        <label class="label-quest"> <input type="radio" name="q3" value="a"> a) Alternativa A </label>
+        <label class="label-quest"> <input type="radio" name="q3" value="b"> b) Alternativa B </label>
+        <label class="label-quest"> <input type="radio" name="q3" value="c"> c) Alternativa C </label>
+      </div>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-button btnHovers">Enviar</button>
+  </form>
+
+  <div id="result" style="display: none;">
+    <h2>Resultado</h2>
+    <p id="score"></p>
+  </div>
+
 </body>
 </html>
 
-    <form class="formEmail">
-        <div>
-            <a href="resp.php" class="btnRespoderQuestionario">Quiz</a>
-        </div><br><br>
-        <!-- Remaining code... -->
-    </form>
-
-   
     <form action="/../../php/enviaEmail.php" method="post" class="formEmail">
         <div>
             <span class="span-title">Entre em contato: </span>
